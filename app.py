@@ -2,7 +2,7 @@ import logging
 
 import os
 import flask
-from flasgger import Swagger # Used for Documentation
+# from flasgger import Swagger # Used for Documentation
 from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
 
@@ -21,7 +21,7 @@ application.config["Access-Control-Allow-Origin"] = "*"
 
 CORS(application)
 
-swagger = Swagger(application)
+# swagger = Swagger(application)
 
 
 def clienterror(error):
