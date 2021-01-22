@@ -13,13 +13,13 @@ logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=lo
 logger = logging.getLogger(__name__)
 
 # Initialize the Flask application
-application = Flask(__name__)
+app = Flask(__name__)
 
-application.config['ALLOWED_EXTENSIONS'] = set(['pdf'])
-application.config['CONTENT_TYPES'] = {"pdf": "application/pdf"}
-application.config["Access-Control-Allow-Origin"] = "*"
+app.config['ALLOWED_EXTENSIONS'] = set(['pdf'])
+app.config['CONTENT_TYPES'] = {"pdf": "application/pdf"}
+app.config["Access-Control-Allow-Origin"] = "*"
 
-CORS(application)
+CORS(app)
 
 # swagger = Swagger(application)
 
@@ -36,7 +36,7 @@ def notfound(error):
     return resp
 
 
-@application.route('/v1/multilabel', methods=['POST']) # This defines the endpoint as a URL # It's POST, because its expecting to receive some information
+@app.route('/v1/multilabel', methods=['POST']) # This defines the endpoint as a URL # It's POST, because its expecting to receive some information
 def sentiment_classification():
     """Run multi-label boardgame classification given boardgame description.
         ---
@@ -89,7 +89,7 @@ def sentiment_classification():
         return flask.jsonify({"status": "success", "predicted_categories": predicted_categories.tolist()}) # Returning an answer to the POST request; the .jsonify part will put HTTP status 200
 
 
-@application.route('/v1/multilabel/categories', methods=['GET'])
+@app.route('/v1/multilabel/categories', methods=['GET'])
 def multilabel_categories():
     """Possible boardgame categories.
         ---
@@ -116,4 +116,4 @@ def multilabel_categories():
 
 
 if __name__ == '__main__':
-    application.run(debug=True, use_reloader=True)
+    app.run(debug=True, use_reloader=True)
